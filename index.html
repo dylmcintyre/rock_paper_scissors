@@ -4,12 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .main{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .main div{
+            display: flex;
+            flex-direction: row;
+        }
+        .choices{
+            display: flex;
+            flex-direction: row;
+        }
+        .score{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .numb{
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
 </head>
 <body>
-    <script src="commands.js">
+    <script src="commands.js" defer>
         console.log("Hello World")
 
     </script>
+    <div class="main">
+        <div class="choices"></div>
+            <button class="rock">Rock</button>
+            <button class="paper">Paper</button>
+            <button class="scissors">Scissors</button>
+        <div class="results"></div>
+    </div>
     
 </body>
 </html>

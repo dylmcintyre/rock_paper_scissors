@@ -1,6 +1,22 @@
 let humanScore=0;
 let computerScore=0;
 
+const results_window=document.querySelector(".results")
+
+const rock_btn=document.querySelector(".rock");
+rock_btn.addEventListener("click", function(){ 
+    playRound("rock", getComputerChoice());
+});
+
+const paper_btn=document.querySelector(".paper");
+paper_btn.addEventListener("click", function(){ 
+    playRound("paper", getComputerChoice());
+});
+
+const scissors_btn=document.querySelector(".scissors");
+scissors_btn.addEventListener("click", function(){ 
+    playRound("scissors", getComputerChoice());
+});
 
 function getComputerChoice(){
     const rand=Math.random();
@@ -27,42 +43,40 @@ function getHumanChoice(){
 }
 
 function playRound(humanChoice, computerChoice){
-    while(humanChoice == computerChoice) {
-        console.log("You tied, choose again.");
-        humanChoice= getHumanChoice();
-        computerChoice= getComputerChoice();
+    if(humanChoice == computerChoice) {
+        results_window.textContent="You tied, choose again.";
     }
-    console.log("human choice: " + humanChoice);
-    if (humanChoice=="rock"){
+    else if (humanChoice=="rock"){
         if(computerChoice=="scissors"){
             humanScore+=1;
-            return("You win! Rock beats scissors.")
+            results_window.textContent="You win! Rock beats scissors.";
         }
         else{
             computerScore+=1;
-            return("You lose! Paper beats rock.")
+            results_window.textContent="You lose! Paper beats rock.";
         }
     }
-    if (humanChoice=="scissors"){
+    else if (humanChoice=="scissors"){
         if(computerChoice=="rock"){
             computerScore+=1;
-            return("You lose! Rock beats scissors.")
+            results_window.textContent="You lose! Rock beats scissors.";
         }
         else{
             humanScore+=1;
-            return("You win! Scissors beats paper.")
+            results_window.textContent="You win! Scissors beats paper.";
         }
     }
     else {
         if(computerChoice=="rock"){
             humanScore+=1;
-            return("You win! Paper beats rock.")
+            results_window.textContent="You win! Paper beats rock.";
         }
         else{
             computerScore+=1;
-            return("You lose! Scissors beats paper.")
+            results_window.textContent="You lose! Scissors beats paper."
         }
     }
+    updateScore();
 }
 
 function playGame(){
@@ -77,4 +91,31 @@ function playGame(){
     }
 }
 
-console.log(playGame());
+function updateScore(){
+    human_tally.textContent=humanScore;
+    computer_tally.textContent=computerScore;
+}
+const human_tally_label=document.createElement("h1");
+const computer_tally_label=document.createElement("h1");
+const human_tally=document.createElement("h1");
+const computer_tally=document.createElement("h1");
+human_tally_label.textContent="Your Score  ";
+computer_tally_label.textContent="Computer Score  ";
+human_tally.textContent=humanScore;
+computer_tally.textContent=computerScore;
+human_tally.classList.toggle("numb");
+computer_tally.classList.toggle("numb");
+
+
+const div=document.createElement("div");
+const div1=document.createElement("div");
+const div2=document.createElement("div");
+div1.append(human_tally_label);
+div2.append(computer_tally_label);
+div1.append(human_tally);
+div2.append(computer_tally);
+div.append(div1);
+div.append(div2);
+div.classList.toggle("score");
+body=document.querySelector("body");
+body.append(div);
